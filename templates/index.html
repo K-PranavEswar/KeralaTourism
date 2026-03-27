@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --emerald-deep: #022c22;
+            --emerald-primary: #059669;
+            --emerald-light: #d1fae5;
+            --gold-accent: #fbbf24;
+            --cream-bg: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--cream-bg);
+            color: var(--emerald-deep);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- ADVANCED NAV --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(248, 250, 252, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(5, 150, 105, 0.1);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--emerald-deep);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span { color: var(--emerald-primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--emerald-deep);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover { color: var(--emerald-primary); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            background: linear-gradient(to right, #f8fafc 40%, transparent 100%), 
+                        url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1;
+            margin-bottom: 25px;
+            color: var(--emerald-deep);
+        }
+
+        .hero-content h1 span {
+            display: block;
+            color: var(--emerald-primary);
+            font-style: italic;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cta-primary {
+            padding: 18px 35px;
+            background: var(--emerald-deep);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.4s;
+            box-shadow: 0 10px 25px rgba(2, 44, 34, 0.2);
+        }
+
+        .cta-primary:hover {
+            background: var(--emerald-primary);
+            transform: translateY(-5px);
+        }
+
+        /* --- FEATURE CARDS (THE "GREEN" TOUCH) --- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 100px 8%;
+            margin-top: -100px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            transition: 0.5s;
+            border: 1px solid rgba(5, 150, 105, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            background: var(--emerald-deep);
+            transform: translateY(-15px);
+        }
+
+        .card i {
+            color: var(--emerald-primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card:hover h3, .card:hover p, .card:hover i {
+            color: white;
+        }
+
+        /* --- BENTO STYLE HIGHLIGHT --- */
+        .highlight {
+            padding: 100px 8%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .img-container {
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            border-radius: 30px;
+            object-fit: cover;
+            box-shadow: 0 30px 60px rgba(2, 44, 34, 0.15);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--gold-accent);
+            padding: 30px;
+            border-radius: 20px;
+            font-weight: 800;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--emerald-deep);
+            color: white;
+            padding: 60px 8% 30px;
+            text-align: center;
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 5%; }
+            .nav-links { display: none; }
+            .hero { background: linear-gradient(to top, #f8fafc 50%, rgba(248, 250, 252, 0.2) 100%), url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1600&q=80'); text-align: center; justify-content: center;}
+            .cta-group { justify-content: center; }
+            .highlight { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+    <div class="logo">
+        <i data-lucide="palmtree"></i> KER<span>ALA</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('destinations') }}">Destinations</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    </ul>
+</nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Nature's Own <span>Masterpiece.</span></h1>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #475569;">Experience the soul of Kerala through its emerald backwaters, spice-scented hills, and timeless traditions.</p>
+            <div class="cta-group">
+                <a href="#" class="cta-primary">Plan Your Journey</a>
+                <a href="#" style="color: var(--emerald-deep); text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="play-circle"></i> Watch Video
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="card">
+            <i data-lucide="waves" size="32"></i>
+            <h3>Backwaters</h3>
+            <p>Float through the silent arteries of Venice of the East.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="mountain" size="32"></i>
+            <h3>Misty Hills</h3>
+            <p>Wake up above the clouds in the tea gardens of Munnar.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="leaf" size="32"></i>
+            <h3>Ayurveda</h3>
+            <p>Heal your soul with 5,000 years of traditional wisdom.</p>
+        </div>
+    </section>
+
+    <section class="highlight">
+        <div class="img-container">
+            <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?auto=format&fit=crop&w=1200&q=80" alt="Houseboat">
+            <div class="experience-badge">
+                <span style="display: block; font-size: 2rem;">25+</span>
+                <span style="font-size: 0.8rem; text-transform: uppercase;">Award Winning<br>Destinations</span>
+            </div>
+        </div>
+        <div class="highlight-text">
+            <h2 style="font-family: 'Syne'; font-size: 3rem; line-height: 1.1; margin-bottom: 20px;">Why choose the <span>Green Life?</span></h2>
+            <p style="margin-bottom: 25px; color: #475569;">Kerala isn't just a destination; it's a feeling. From the rhythmic beats of Chenda Melam to the spicy aroma of Karimeen Pollichathu, every corner tells a story of harmony between man and nature.</p>
+            <ul style="list-style: none; display: grid; gap: 15px; font-weight: 600;">
+                <li style="display: flex; align-items: center; gap: 10px; color: var(--emerald-primary);">
+                    <i data-lucide="check-circle-2"></i> Sustainable Eco-Tourism
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px; color: var(--emerald-primary);">
+                    <i data-lucide="check-circle-2"></i> World-Class Hospitality
+                </li>
+                <li style="display: flex; align-items: center; gap: 10px; color: var(--emerald-primary);">
+                    <i data-lucide="check-circle-2"></i> Authentic Cultural Heritage
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p style="font-family: 'Syne'; font-size: 1.5rem; margin-bottom: 10px;">God's Own Country</p>
+        <p style="opacity: 0.6; font-size: 0.9rem;">© 2026 Kerala Tourism Department. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

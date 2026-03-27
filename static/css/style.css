@@ -1,0 +1,249 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4fbf8;
+    color: #1f2933;
+}
+
+/* NAVBAR (GLOBAL) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    width: 100%;
+}
+
+/* HERO NAVBAR (WHITE TEXT) */
+.hero .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* LOGO */
+.logo {
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+/* HERO LOGO */
+.hero .logo {
+    color: #ffffff;
+}
+
+/* SUBPAGE HEADER */
+.subpage-header {
+    background-color: #ffffff;
+    padding: 20px 60px;
+    border-bottom: 1px solid #d0e7e0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* SUBPAGE LOGO */
+.subpage-header .logo {
+    color: #156b5b;
+}
+
+/* NAV LINKS */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li {
+    position: relative;
+}
+
+/* HERO NAV LINKS */
+.hero .nav-links a {
+    color: #ffffff;
+}
+
+/* SUBPAGE NAV LINKS */
+.dark-nav a {
+    color: #156b5b;
+}
+
+/* COMMON LINK STYLE */
+.nav-links a {
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.nav-links a:hover {
+    border-bottom: 2px solid currentColor;
+}
+
+/* ACTIVE LINK */
+.active-link {
+    border-bottom: 2px solid #156b5b;
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(14, 86, 73, 0.7), rgba(14, 86, 73, 0.7)),
+        url("https://images.unsplash.com/photo-1602302102732-44b3ea74b03c?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat fixed;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* HERO CONTENT */
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 16px;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+}
+
+/* BUTTON */
+.cta-btn,
+.view-more-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #156b5b, #0f5447);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.cta-btn:hover,
+.view-more-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #0f5447, #0d4336);
+}
+
+/* CONTAINER */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 0;
+}
+
+/* PAGE HEADER */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: #156b5b;
+}
+
+.page-header p {
+    margin: 10px auto;
+    max-width: 700px;
+}
+
+/* SECTIONS */
+.about-section,
+.destinations-section {
+    margin-bottom: 50px;
+}
+
+.about-section h2,
+.destinations-section h2,
+.info-box h2 {
+    color: #156b5b;
+    margin-bottom: 15px;
+}
+
+/* DESTINATION GRID */
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+/* CARD */
+.destination-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.destination-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.destination-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 18px;
+}
+
+.card-content h3 {
+    color: #156b5b;
+    margin-bottom: 10px;
+}
+
+/* INFO BOX */
+.info-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+/* BUTTON WRAPPER */
+.button-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+}

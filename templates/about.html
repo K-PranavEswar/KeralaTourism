@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --emerald-deep: #022c22;
+            --emerald-primary: #059669;
+            --emerald-soft: #ecfdf5;
+            --gold-accent: #fbbf24;
+            --bg-cream: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--emerald-deep);
+            line-height: 1.7;
+        }
+
+        /* --- MODERN NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(248, 250, 252, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(5, 150, 105, 0.1);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--emerald-deep);
+        }
+        
+        .logo span { color: var(--emerald-primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--emerald-deep);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .active-link { color: var(--emerald-primary) !important; }
+
+        /* --- PAGE HEADER --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- HERO IMAGE WITH DECORATION --- */
+        .about-hero-wrapper {
+            position: relative;
+            margin-bottom: 100px;
+        }
+
+        .about-hero {
+            height: 450px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(2, 44, 34, 0.15);
+        }
+
+        .about-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s;
+        }
+
+        .about-hero:hover img { transform: scale(1.05); }
+
+        /* --- INFO GRID --- */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: -120px;
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 50px;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border: 1px solid rgba(5, 150, 105, 0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .info-box:hover { transform: translateY(-15px); }
+
+        .info-box h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--emerald-primary);
+        }
+
+        /* --- VISION SECTION (MINIMALIST) --- */
+        .vision-section {
+            margin-top: 100px;
+            background: var(--emerald-deep);
+            color: white;
+            padding: 80px;
+            border-radius: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .vision-section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            line-height: 1.1;
+        }
+
+        .vision-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .vision-list li {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        /* --- FOOTER CTA --- */
+        .cta-strip {
+            margin-top: 100px;
+            padding: 80px 40px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, var(--emerald-primary), #065f46);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-strip h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:900px){
+            .info-section { grid-template-columns: 1fr; margin-top: 20px; }
+            .vision-section { grid-template-columns: 1fr; padding: 40px 30px; }
+            .vision-list { grid-template-columns: 1fr; }
+            .navbar { padding: 15px 5%; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+    <div class="logo">
+        <i data-lucide="palmtree"></i> KER<span>ALA</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('destinations') }}">Destinations</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    </ul>
+</nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1>Our Story & <span>Philosophy</span></h1>
+            <p>We are more than a travel guide. We are your gateway to the authentic soul of God's Own Country.</p>
+        </section>
+
+        <div class="about-hero-wrapper">
+            <div class="about-hero">
+                <img src="https://images.unsplash.com/photo-1593693411515-c20261bcad6e?auto=format&fit=crop&w=1200&q=80" alt="Kerala Landscape">
+            </div>
+        </div>
+
+        <section class="info-section">
+            <div class="info-box">
+                <i data-lucide="map-pin" style="color: var(--gold-accent); margin-bottom: 15px;"></i>
+                <h2>Why Kerala?</h2>
+                <p>Kerala is where time slows down. From the emerald backwaters to the misty spice hills, it offers a sanctuary for those seeking peace, culture, and raw natural beauty.</p>
+            </div>
+
+            <div class="info-box">
+                <i data-lucide="compass" style="color: var(--gold-accent); margin-bottom: 15px;"></i>
+                <h2>Our Mission</h2>
+                <p>To redefine travel by connecting global explorers with the hidden gems of Kerala, ensuring sustainable growth for our local communities and an unforgettable journey for you.</p>
+            </div>
+        </section>
+
+        <section class="vision-section">
+            <div>
+                <h2>Our Global Vision</h2>
+                <p style="opacity: 0.7; margin-top: 20px;">We aim to place Kerala on the map as the world's premier sustainable tourism destination.</p>
+            </div>
+            <ul class="vision-list">
+                <li><i data-lucide="globe"></i> Global Reach</li>
+                <li><i data-lucide="users"></i> Community Support</li>
+                <li><i data-lucide="leaf"></i> Eco-Friendly</li>
+                <li><i data-lucide="sparkles"></i> Pure Experiences</li>
+            </ul>
+        </section>
+
+        <section class="cta-strip">
+            <h2>🌴 Discover the Soul of Kerala</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9;">Your journey into the green heart of India begins here.</p>
+            <a href="#" style="background: white; color: var(--emerald-deep); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-block;">Start Exploring</a>
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
