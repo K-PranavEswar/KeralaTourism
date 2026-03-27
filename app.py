@@ -3,8 +3,7 @@ import os
 import csv
 
 app = Flask(__name__)
-
-CSV_FILE = "kerala-tourism.csv"
+CSV_FILE = os.path.join(os.getcwd(), "kerala-tourism.csv")
 
 if not os.path.exists(CSV_FILE):
     with open(CSV_FILE, mode='w', newline='') as file:
@@ -32,6 +31,8 @@ def submit():
     name = request.form.get("name")
     email = request.form.get("email")
     message = request.form.get("message")
+
+    print("Saving:", name, email, message)
 
     with open(CSV_FILE, mode='a', newline='') as file:
         writer = csv.writer(file)
