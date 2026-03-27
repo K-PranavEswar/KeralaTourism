@@ -1,20 +1,30 @@
 from flask import Flask, render_template, request, redirect, url_for
+import sqlite3
 import os
-import csv
 
 app = Flask(__name__)
 
-CSV_FILE = os.path.join(os.getcwd(), "kerala-tourism.csv")
+DB_FILE = os.path.join(os.getcwd(), "database.db")
 
-# Create CSV file if not exists
-if not os.path.isfile(CSV_FILE):
-    try:
-        with open(CSV_FILE, mode='w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Name", "Email", "Message"])
-        print("CSV file created successfully")
-    except Exception as e:
-        print("Error creating CSV:", e)
+def get_db():
+    conn = sqlite3.connect(DB_FILE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    conn = get_db()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS contacts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            message TEXT NOT NULL
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+init_db()
 
 
 @app.route("/")
@@ -44,24 +54,43 @@ def submit():
     email = request.form.get("email")
     message = request.form.get("message")
 
-    print("Received:", name, email, message)
-
     if not name or not email or not message:
-        print("Invalid form data")
         return redirect(url_for('contact', success=0))
 
     try:
-        with open(CSV_FILE, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([name, email, message])
-
-        print("Data saved successfully")
+        conn = get_db()
+        conn.execute(
+            "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)",
+            (name, email, message)
+        )
+        conn.commit()
+        conn.close()
+        print("Data stored in DB")
 
     except Exception as e:
-        print("Error saving data:", e)
+        print("DB Error:", e)
         return redirect(url_for('contact', success=0))
 
     return redirect(url_for('contact', success=1))
+
+
+# 🔥 ADMIN PANEL
+@app.route('/admin')
+def admin():
+    conn = get_db()
+    data = conn.execute("SELECT * FROM contacts ORDER BY id DESC").fetchall()
+    conn.close()
+    return render_template("admin.html", data=data)
+
+
+# 🔥 DELETE DATA
+@app.route('/delete/<int:id>')
+def delete(id):
+    conn = get_db()
+    conn.execute("DELETE FROM contacts WHERE id=?", (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin'))
 
 
 if __name__ == "__main__":

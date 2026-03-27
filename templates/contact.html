@@ -361,10 +361,10 @@
         // Initialize Icons
         lucide.createIcons();
     </script>
-{% if success %}
-<script>
-    alert("Data sent successfully");
-</script>
+{% if success == '1' %}
+<p style="color:green;">Message sent successfully!</p>
+{% elif success == '0' %}
+<p style="color:red;">Please fill all fields!</p>
 {% endif %}
 </body>
 </html>
