@@ -44,24 +44,22 @@ def submit():
     email = request.form.get("email")
     message = request.form.get("message")
 
+    print("Received:", name, email, message)
+
+    if not name or not email or not message:
+        print("Invalid form data")
+        return redirect(url_for('contact', success=0))
+
     try:
         with open(CSV_FILE, mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow([name, email, message])
 
-        print("Data saved:", name)
-
-        # 🔥 Auto Git Push (optional)
-        try:
-            os.system("git add kerala-tourism.csv")
-            os.system('git commit -m "Auto update CSV data"')
-            os.system("git push origin main")
-            print("GitHub updated")
-        except Exception as git_error:
-            print("Git push failed:", git_error)
+        print("Data saved successfully")
 
     except Exception as e:
         print("Error saving data:", e)
+        return redirect(url_for('contact', success=0))
 
     return redirect(url_for('contact', success=1))
 
